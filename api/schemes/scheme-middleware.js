@@ -14,8 +14,7 @@ const checkSchemeId = async (req, res, next) => {
       .first()
 
     if (!existing) {
-      next({
-        stats: 404,
+      res.status(404).json({
         message: `scheme with scheme_id ${req.params.scheme_id} not found`
       })
     } else {
@@ -38,8 +37,7 @@ const validateScheme = (req, res, next) => {
   if (req.body.scheme_name === undefined || 
     typeof req.body.scheme_name !== 'string' || 
     !req.body.scheme_name.trim()) {
-      next({
-        status: 400,
+      res.status(400).json({
         message: "invalid scheme_name"
       })
     } else {
